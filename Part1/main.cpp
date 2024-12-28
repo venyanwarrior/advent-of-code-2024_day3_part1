@@ -23,21 +23,14 @@ int main() {
     std::regex mulRegex(R"rgx(mul\(\d+,\d+\))rgx");
     auto mulBegin = std::sregex_iterator(inputData.begin(), inputData.end(), mulRegex);
 
-    std::cout << "Found " << std::distance(mulBegin, std::sregex_iterator()) << " occurences of mul(x,x):\n";
-
     std::vector<std::string> mulMatches;
     for (auto it = mulBegin; it != std::sregex_iterator(); it++) {
         std::smatch mulMatch = *it;
         mulMatches.push_back(mulMatch.str());
     }
 
-    for (std::string s : mulMatches) {
-        std::cout << s << std::endl;
-    }
-
     std::regex numRegex(R"rgx(\d+)rgx");
     std::sregex_iterator numBegin;
-
     int total = 0;
     for (auto vIt = mulMatches.begin(); vIt != mulMatches.end(); vIt++) {
         std::string mulString = std::data(*vIt);
@@ -47,8 +40,8 @@ int main() {
             sIt++;
             std::smatch num2 = *sIt;
             total += stoi(num1.str()) * stoi(num2.str());
-            printf("num1: %s, num2: %s\n", num1.str().c_str(), num2.str().c_str());
         }
     }
+    std::cout << "Found " << std::distance(mulBegin, std::sregex_iterator()) << " occurences of mul(x,x)." << std::endl;
     printf("Total: %d\n", total);
 }
