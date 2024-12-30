@@ -19,6 +19,7 @@ int main() {
         std::getline(infile, dataChunk);
         inputData += dataChunk;
     }
+    infile.close();
 
     std::regex mulRegex(R"rgx(mul\(\d+,\d+\))rgx");
     auto mulBegin = std::sregex_iterator(inputData.begin(), inputData.end(), mulRegex);
